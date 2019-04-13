@@ -11,7 +11,8 @@
     "react-dev": "webpack --watch -d",
     "db:setup": "node database-mongodb/seed.js",
     "db:setup2": "node database-mongodb/seed2.js",
-    "start": "node index.js"
+    "start": "node index.js",
+    "dockerstart": "node index.js & node database-mongodb/seed2.js & node database-mongodb/seed2.js"
   },
   "repository": {
     "type": "git",
