@@ -14,4 +14,4 @@ RUN npm run db:setup2
 
 EXPOSE 3001
 
-CMD [ "npm", "run", "dockerstart" ]
+CMD [ "npm", "run", "start" ]

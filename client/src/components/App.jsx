@@ -21,19 +21,8 @@ const BothModules = styled.div`
 @font-face {
   font-family: DIN Pro;
   font-weight: normal;
+  font-display: auto;
   src: url("fonts/DINProRegular.otf") format("opentype");
-}
-
-@font-face {
-  font-family: DIN Pro;
-  font-weight: bold;
-  src: url("lib/DIN Alternate\ Bold.ttf") format("truetype");
-}
-
-@font-face {
-  font-family: DIN Pro;
-  font-weight: 300;
-  src: url("lib/DIN\ Condensed\ Bold.ttf") format("truetype");
 }
 
 body, p, div {
