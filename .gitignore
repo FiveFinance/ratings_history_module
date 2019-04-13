@@ -7,3 +7,5 @@ logs
 npm-debug.log*
 .DS_Store
 package-lock.json
+
+.ratings_history_module.pem
