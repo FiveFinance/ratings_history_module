@@ -1,4 +1,3 @@
-import React from 'react';
 import styled from 'styled-components';
 import RatingsModule from './RatingsApp';
 import HistoryModule from './HistoryApp';
