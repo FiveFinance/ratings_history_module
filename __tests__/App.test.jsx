@@ -1,9 +1,9 @@
 import React from 'react';
 import { shallow } from 'enzyme';
 
-import App from '../client/src/components/App';
-import RatingsApp from '../client/src/components/RatingsApp';
-import HistoryApp from '../client/src/components/HistoryApp';
+import App from '../ratings/client/src/components/App';
+import RatingsApp from '../ratings/client/src/components/RatingsApp';
+import HistoryApp from '../history/client/src/components/HistoryApp';
 
 function setup() {
   const myApp = shallow(<App />);

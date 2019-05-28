@@ -1,13 +1,28 @@
-# ratings_history_module
+# Repository for Ratings microservice and Purchase History microservice
+
 ## Description
-The Analyst Ratings module displays data and expert recommendations in an accessible and user-friendly UI. The Purchase History module renders a dynamic and individually expanding list of past purchases.    As a potential customer, I want to be able to easily and confidently determine whether I should buy, hold, or sell.   As an existing customer, I want to see my history of past purchases so that I can see that I am making good purchasing decisions and/or improve future decisions. 
+The Analyst Ratings module displays data and expert recommendations in an accessible and user-friendly UI. As a potential customer, I want to be able to easily and confidently determine whether I should buy, hold, or sell.
 
+The Purchase History module renders a dynamic and individually expanding list of past purchases. As an existing customer, I want to see my history of past purchases so that I can see that I am making good purchasing decisions and/or improve future decisions. 
 
-## Note
-Note: for a proxy server, the compressed webpack bundles (bundle.js.gz and bundle.js.br) can be uploaded to S3 rather than living in the client/dist/.
+## Deployment
 
-## Scripts
-```
-npm run react-dev (webpack --watch -d)
-npm start (node index.js not nodemon index.js)
-```
+* include a `<div>` element with `id="ratings"` and `id="history"`
+* A) add a `<script>` tag with `src="ec2-18-221-144-48.us-east-2.compute.amazonaws.com/ratings/bundle.js"` and `src="ec2-18-221-144-48.us-east-2.compute.amazonaws.com/history/bundle.js"`
+* B) for local deployment only, add a `<script>` tag pointing to `src="localhost:3001/ratings/bundle.js.gz"` and `src="localhost:3001/history/bundle.js.gz"`
+* This app is best viewed with Chrome web browser
+
+## Getting Started
+
+* Download dependencies
+`npm install`
+
+* Compile with Webpack
+`npm run compile`
+
+* Start Server
+`npm start`
+
+## Author
+
+Vickie Huang

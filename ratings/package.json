@@ -1,18 +1,17 @@
 {
-  "name": "ratings_history_module",
-  "version": "1.0.0",
-  "description": "Repository for Expert Analyst Ratings microservice and Purchase History microservice",
-  "main": "index.js",
+  "name": "ratings_module",
+  "version": "2.0.0",
+  "description": "Purchase History microservice",
+  "main": "server.js",
   "browser": "./lib/browser.js",
   "scripts": {
     "test": "jest --colors --detectOpenHandles",
     "test:watch": "jest --watch",
     "test:coverage": "jest --collectCoverage --colors",
-    "postinstall": "cd ratings && npm install && npm run webpack && cd .. cd history && npm install && npm run webpack",
-    "db:setup": "node ratings/database-mongodb/seed.js",
-    "db:setup2": "node server/database-mongodb/seed2.js",
-    "start-dev": "nodemon index.js",
-    "start": "start": "node ratings/server.js && history/server.js"
+    "compile": "webpack --watch -d",
+    "postinstall": "webpack",
+    "db:setup": "node database-mongodb/seed.js",
+    "start-dev": "nodemon server.js"
   },
   "repository": {
     "type": "git",
@@ -71,6 +70,6 @@
     "mongoose": "^5.4.20",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6",
+    "react-dom": "^16.8.6"
   }
 }

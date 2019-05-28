@@ -1,9 +1,7 @@
 # Dependency directories
-node_modules/
+*node_modules/*
 
 # Logs
+.DS_Store
 logs
 *.log
-npm-debug.log*
-.DS_Store
-package-lock.json

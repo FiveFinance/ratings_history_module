@@ -1,6 +1,6 @@
 module.exports = {
     extends: './node_modules/eslint-config-airbnb/index.js', 
-   "parserOptions": { "ecmaVersion": 6 } ,
+   "parserOptions": { "ecmaVersion": 6 },
    plugins: [
     'react',
     'jest',
@@ -12,12 +12,11 @@ module.exports = {
     node: true,
     "jest/globals": true,
   },
-    "rules": {
-      "jest/no-disabled-tests": "warn",
-      "jest/no-focused-tests": "error",
-      "jest/no-identical-title": "error",
-      "jest/prefer-to-have-length": "warn",
-      "jest/valid-expect": "error"
-    },
-  
+  "rules": {
+    "jest/no-disabled-tests": "warn",
+    "jest/no-focused-tests": "error",
+    "jest/no-identical-title": "error",
+    "jest/prefer-to-have-length": "warn",
+    "jest/valid-expect": "error"
+  },
 };
