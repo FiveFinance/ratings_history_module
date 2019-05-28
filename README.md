@@ -5,14 +5,6 @@ The Analyst Ratings module displays data and expert recommendations in an access
 
 The Purchase History module renders a dynamic and individually expanding list of past purchases. As an existing customer, I want to see my history of past purchases so that I can see that I am making good purchasing decisions and/or improve future decisions. 
 
-## Deployment
-
-* Use port `3001` for ratings module and port `3011` for history module
-* In `index.html`, include a `<div>` element with `id="ratings"` and `id="history"`
-* A) add a `<script>` tag with `src="ec2-18-221-144-48.us-east-2.compute.amazonaws.com/ratings/bundle.js"` and `src="ec2-18-221-144-48.us-east-2.compute.amazonaws.com/history/bundle.js"`
-* B) for local deployment only, add a `<script>` tag pointing to `src="localhost:3001/ratings/bundle.js.gz"` and `src="localhost:3001/history/bundle.js.gz"`
-* This app is best viewed with Chrome web browser
-
 ## Getting Started
 
 * Change directory into each module/microservice
@@ -27,3 +19,26 @@ The Purchase History module renders a dynamic and individually expanding list of
 ## Author
 
 Vickie Huang
+
+## Deployment
+
+* This app is best viewed with Chrome web browser
+* In `index.html`, include a `<div>` element with `id="ratings"` and `id="history"`
+* Add a `<script>` tag
+  - Use port `3001` for ratings module and port `3011` for history module
+  - (local) `src="localhost:3001/ratings/bundle.js"`
+  - (local) `src="localhost:3011/history/bundle.js"`
+  - EC2: `src="https://s3.us-east-2.amazonaws.com/merryweather/fec/ratings/bundle.js"`
+  - EC2: `src="https://s3.us-east-2.amazonaws.com/merryweather/fec/history/bundle.js"`
+  - S3: `src="https://s3.us-east-2.amazonaws.com/merryweather/fec/ratings/bundle.js"`
+  - S3: `src="https://s3.us-east-2.amazonaws.com/merryweather/fec/history/bundle.js"`
+
+## Demos
+
+### Ratings Microservice
+
+![](ratings_demo.gif)
+
+### History Microservice
+
+![](history_demo.gif)
