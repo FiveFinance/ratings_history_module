@@ -2,13 +2,13 @@ module.exports = {
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
 
-  // An array of glob patterns indicating a set of files for which coverage information should be collected
-  collectCoverageFrom: ['ratings/client/src/**/*.{js,jsx,mjs}',
-    'history/client/src/**/*.{js,jsx,mjs}',
-    '!<rootDir>/ratings/client/dist/lib/',
-    '!<rootDir>/ratings/client/src/index.jsx',
-    '!<rootDir>/history/client/src/index.jsx',
-  ],
+  // // An array of glob patterns indicating a set of files for which coverage information should be collected
+  // collectCoverageFrom: ['ratings/client/src/**/*.{js,jsx,mjs}',
+  //   'history/client/src/**/*.{js,jsx,mjs}',
+  //   '!<rootDir>/ratings/client/dist/lib/',
+  //   '!<rootDir>/ratings/client/src/index.jsx',
+  //   '!<rootDir>/history/client/src/index.jsx',
+  // ],
 
   // The directory where Jest should output its coverage files
   coverageDirectory: 'coverage',
