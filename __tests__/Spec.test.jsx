@@ -2,12 +2,12 @@ import React from 'react';
 import { shallow, mount } from 'enzyme';
 
 /* Components */
-import RatingsApp from '../client/src/components/RatingsApp';
-import DataBarChart from '../client/src/components/DataBarChart';
-import DataSpotlight from '../client/src/components/DataSpotlight';
-import ReviewList from '../client/src/components/ReviewList';
-import HistoryApp from '../client/src/components/HistoryApp';
-import Purchase from '../client/src/components/Purchase';
+import RatingsApp from '../ratings/client/src/components/RatingsApp';
+import DataBarChart from '../ratings/client/src/components/DataBarChart';
+import DataSpotlight from '../ratings/client/src/components/DataSpotlight';
+import ReviewList from '../ratings/client/src/components/ReviewList';
+import HistoryApp from '../history/client/src/components/HistoryApp';
+import Purchase from '../history/client/src/components/Purchase';
 
 /* Mock Data */
 const exampleStock = {

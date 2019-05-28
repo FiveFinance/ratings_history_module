@@ -9,7 +9,7 @@
     "test:watch": "jest --watch",
     "test:coverage": "jest --collectCoverage --colors",
     "compile": "webpack --watch -d",
-    "postinstall": "webpack",
+    "postinstall": "webpack && npm run db:setup",
     "db:setup": "node database-mongodb/seed.js",
     "start-dev": "nodemon server.js"
   },
@@ -70,6 +70,9 @@
     "mongoose": "^5.4.20",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",
-    "react-dom": "^16.8.6"
+    "react-dom": "^16.8.6",
+    "styled-components": "^4.2.0",
+    "styled-icons": "^8.0.0",
+    "url-loader": "^1.1.2"
   }
 }

@@ -1,13 +1,9 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 const Stock = require('./database-mongodb/Stock.js');
 
 const app = express();
 const PORT = 3001;
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', express.static(path.join(__dirname, 'client/dist')));
 app.use('/stocks/:stockid', express.static(path.join(__dirname, 'client/dist')));

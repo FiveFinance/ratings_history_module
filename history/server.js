@@ -1,13 +1,9 @@
 const express = require('express');
 const path = require('path');
-const bodyParser = require('body-parser');
 const Purchase = require('./database-mongodb/Stock2.js');
 
 const app = express();
 const PORT = 3011;
-
-app.use(bodyParser.json());
-app.use(bodyParser.urlencoded({ extended: true }));
 
 app.use('/', express.static(path.join(__dirname, 'client/dist')));
 app.use('/stocks/:stockid', express.static(path.join(__dirname, 'client/dist')));
@@ -17,9 +13,8 @@ app.get('/api/history/:stockID', (req, res) => {
     .find({ symbol: req.params.stockID.toUpperCase() })
     .exec((err, data) => {
     if (err) {
-        console.log(`Error: ${err}`);
-        res.status(500).send(err);
-        throw (err);
+      console.log(`Error: ${err}`);
+      res.status(500).send(err);
     }
     res.status(200).send(data);
   });
