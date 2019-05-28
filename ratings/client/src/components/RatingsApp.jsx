@@ -10,16 +10,17 @@ class RatingsApp extends React.Component {
     super();
     this.state = {
       stock: {
-        symbol: 'DUMMY',
+        symbol: 'PHDR',
+        company: 'Placeholder Company',
         recBuy: 11,
-        recHold: 8,
-        recSell: 20,
-        reviewBuy: 'Dummy Data Taiwan Semiconductor Manufacturing Company Limited local Ergonomic. \n The impactful transform architectures encompassing. \n Overall, granular scale convergence Taiwan Semiconductor Manufacturing Company Limited optimizing',
-        reviewSell: 'Dummy Data B2C target e-tailers local Taiwan Semiconductor Manufacturing Company Limited Ergonomic. \n For B2C implement applications encompassing. \n Hence, B2C target e-tailers Taiwan Semiconductor Manufacturing Company Limited optimizing',
+        recHold: 15,
+        recSell: 18,
+        reviewBuy: 'Rubber killer recontextualize web services Microsoft Corporation impactful Gorgeous. \n The viral envisioneer initiatives Et perspiciatis error quas.. \n Overall, killer recontextualize web services Microsoft Corporation reciprocal Doloribus numquam expedita sed fugit tempore in adipisci.',
+        reviewSell: 'Rubber open-source envisioneer channels impactful Microsoft Corporation Gorgeous. \n For sexy strategize bandwidth Et perspiciatis error quas.. \n Hence, open-source envisioneer channels Microsoft Corporation reciprocal Doloribus numquam expedita sed fugit tempore in adipisci.',
       },
       market: 'Bull',
     };
-    this.market = this.state.pricedifferenceFromStartToToday === 'Negative' ? 'Bear' : 'Bull';
+    // this.market = this.state.pricedifferenceFromStartToToday === 'Negative' ? 'Bear' : 'Bull';
     this.getStockData = this.getStockData.bind(this);
   }
 
@@ -30,7 +31,13 @@ class RatingsApp extends React.Component {
   getStockData() {
     const stockID = window.location.pathname.split('/')[2];
     if (!stockID) {
-      alert('Please enter a stock ID in the browser window location bar, in the format [host]/[path]/stocks/stockID');
+      axios.get(`/api/ratings/AAPL`)
+      .then(res => res.data)
+      .then((result) => {
+        this.setState({
+          stock: result[0],
+        });
+      });
     } else {
       axios.get(`/api/ratings/${stockID}`)
         .then(res => res.data)
