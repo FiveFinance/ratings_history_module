@@ -1,8 +1,9 @@
+require('events').EventEmitter.prototype._maxListeners = 100;
 const faker = require('faker');
 const db = require('./index.js');
 const Purchase = require('./Stock2.js');
 
-const symbolsNames = [
+const tickerNames = [
   ['MSFT', 'Microsoft Corporation'],
   ['AAPL', 'Apple Inc.'],
   ['FB', 'Facebook, Inc.'],
@@ -104,84 +105,54 @@ const symbolsNames = [
   ['CFG', 'Citizens Financial Group, Inc.'],
   ['MYL', 'Mylan N.V.'],
 ];
+class Seed2 {
+  constructor() {
+    this.count = 0;
+    this.stock = [];
+    this.initialize = this.initialize.bind(this);
+    this.makeBS = this.makeBS.bind(this);
+    this.saveDB = this.saveDB.bind(this);
+    this.debug = this.debug.bind(this);
+  }
 
-for (let i = 0; i < symbolsNames.length; i += 1) {
-  const samplePurchaseDateRange = faker.date.between('2015-03-03', '2019-02-02');
-  const sampleQuantity = faker.random.number(100);
+  makeBS(i) {
+    const samplePurchaseDateRange = faker.date.between('2015-03-03', '2019-02-02');
+    const sampleQuantity = faker.random.number(100) + 1;
+  
+    this.stock = [{
+      symbol: tickerNames[i][0],
+      purchase_id: faker.random.number(12131, 80123),
+      name: tickerNames[i][1],
+      timeinforce: 'Good for day',
+      submitted: samplePurchaseDateRange,
+      status: 'filled',
+      enteredQuantity: sampleQuantity,
+      filled: faker.date.between(samplePurchaseDateRange, '2019-02-02'),
+      filledQuantityShares: sampleQuantity,
+      filledQuantityPrice: sampleQuantity,
+      total: faker.commerce.price(),
+    }];
+  }
 
-  const samplePurchase = [{
-    symbol: symbolsNames[i][0],
-    purchase_id: faker.random.number(12131, 80123),
-    name: symbolsNames[i][1],
-    timeinforce: 'Good for day',
-    submitted: samplePurchaseDateRange,
-    status: 'filled',
-    enteredQuantity: sampleQuantity,
-    filled: faker.date.between(samplePurchaseDateRange, '2019-02-02'),
-    filledQuantityShares: sampleQuantity,
-    filledQuantityPrice: sampleQuantity,
-    total: faker.commerce.price(),
-  }];
-
-  const insertSamplePurchase = () => {
-    Purchase.create(samplePurchase)
+  saveDB() {
+    Purchase.create(this.stock)
       .then(() => db.close())
       .catch(err => console.log(`Error saving data to database: ${err}`));
-  };
+  }
+  
+  debug() {
+    console.log(this.stock);
+  }
 
-  insertSamplePurchase();
+  initialize(current) {
+    this.count = current;
+    this.makeBS(this.count);
+    this.saveDB();
+  }
 }
 
-for (let i = 0; i < symbolsNames.length; i += 1) {
-  const samplePurchaseDateRange = faker.date.between('2015-03-03', '2019-02-02');
-  const sampleQuantity = faker.random.number(100) + 1;
+const seedOnce = new Seed2();
 
-  const samplePurchase = [{
-    symbol: symbolsNames[i][0],
-    purchase_id: faker.random.number(12131, 80123),
-    name: symbolsNames[i][1],
-    timeinforce: 'Good for day',
-    submitted: samplePurchaseDateRange,
-    status: 'filled',
-    enteredQuantity: sampleQuantity,
-    filled: faker.date.between(samplePurchaseDateRange, '2019-02-02'),
-    filledQuantityShares: sampleQuantity,
-    filledQuantityPrice: sampleQuantity,
-    total: faker.commerce.price(),
-  }];
-
-  const insertSamplePurchase = () => {
-    Purchase.create(samplePurchase)
-      .then(() => db.close())
-      .catch(err => console.log(`Error saving data to database: ${err}`));
-  };
-
-  insertSamplePurchase();
-}
-
-for (let i = 0; i < symbolsNames.length; i += 1) {
-  const samplePurchaseDateRange = faker.date.between('2015-03-03', '2019-02-02');
-  const sampleQuantity = faker.random.number(100) + 1;
-
-  const samplePurchase = [{
-    symbol: symbolsNames[i][0],
-    purchase_id: faker.random.number(12131, 80123),
-    name: symbolsNames[i][1],
-    timeinforce: 'Good for day',
-    submitted: samplePurchaseDateRange,
-    status: 'filled',
-    enteredQuantity: sampleQuantity,
-    filled: faker.date.between(samplePurchaseDateRange, '2019-02-02'),
-    filledQuantityShares: sampleQuantity,
-    filledQuantityPrice: sampleQuantity,
-    total: faker.commerce.price(),
-  }];
-
-  const insertSamplePurchase = () => {
-    Purchase.create(samplePurchase)
-      .then(() => db.close())
-      .catch(err => console.log(`Error saving data to database: ${err}`));
-  };
-
-  insertSamplePurchase();
+for (let x = 0; x < tickerNames.length; x++) {
+  seedOnce.initialize(x);
 }

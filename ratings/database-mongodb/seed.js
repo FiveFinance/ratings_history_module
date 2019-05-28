@@ -1,4 +1,5 @@
-const faker = require('faker');
+require('events').EventEmitter.prototype._maxListeners = 100;
+const { commerce, company, lorem } = require('faker');
 const db = require('./index.js');
 const Stock = require('./Stock.js');
 
@@ -116,23 +117,23 @@ class Seed {
   }
 
   makeBS(i) {
-    const descriptor = faker.company.catchPhraseDescriptor();
-    const descriptor2 = faker.lorem.sentence();
-    const descriptor3 = faker.company.catchPhraseDescriptor();
-    const descriptor4 = faker.lorem.sentence();
-    const material = faker.commerce.productMaterial();
-    const adjective = faker.commerce.productAdjective();
-    const bs1 = faker.company.bs();
-    const bs2 = faker.company.bs();
-    const bs3 = faker.company.bs();
-    const bs4 = faker.company.bs();
+    const descriptor = company.catchPhraseDescriptor();
+    const descriptor2 = lorem.sentence();
+    const descriptor3 = company.catchPhraseDescriptor();
+    const descriptor4 = lorem.sentence();
+    const material = commerce.productMaterial();
+    const adjective = commerce.productAdjective();
+    const bs1 = company.bs();
+    const bs2 = company.bs();
+    const bs3 = company.bs();
+    const bs4 = company.bs();
   
     this.stock = [{
       symbol: tickerNames[i][0],
       company: tickerNames[i][1],
-      recBuy: faker.random.number(20),
-      recHold: faker.random.number(20),
-      recSell: faker.random.number(20),
+      recBuy: Math.random()*20|0,
+      recHold: Math.random()*20|0,
+      recSell: Math.random()*20|0,
       reviewBuy: `${material} ${bs1} ${tickerNames[i][1]} ${descriptor} ${adjective}. \n The ${bs2} ${descriptor2}. \n Overall, ${bs1} ${tickerNames[i][1]} ${descriptor3} ${descriptor4}`,
       reviewSell: `${material} ${bs3} ${descriptor} ${tickerNames[i][1]} ${adjective}. \n For ${bs4} ${descriptor2}. \n Hence, ${bs3} ${tickerNames[i][1]} ${descriptor3} ${descriptor4}`,
     }];
@@ -155,8 +156,8 @@ class Seed {
   }
 }
 
-const seedOne = new Seed();
+const seedOnce = new Seed();
 
-for (let x = 0; x < tickerNames.length; x++) {
-  seedOne.initialize(x);
+for (let x = 0; x < 100; x++) {
+  seedOnce.initialize(x);
 }
