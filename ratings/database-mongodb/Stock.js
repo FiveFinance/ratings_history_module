@@ -5,6 +5,7 @@ mongoose.Promise = global.Promise;
 
 const stockSchema = new mongoose.Schema({
   symbol: String,
+  company: String,
   recBuy: Number,
   recHold: Number,
   recSell: Number,

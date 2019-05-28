@@ -2,7 +2,7 @@ const faker = require('faker');
 const db = require('./index.js');
 const Stock = require('./Stock.js');
 
-const symbolsNames = [
+const tickerNames = [
   ['MSFT', 'Microsoft Corporation'],
   ['AAPL', 'Apple Inc.'],
   ['FB', 'Facebook, Inc.'],
@@ -105,32 +105,58 @@ const symbolsNames = [
   ['MYL', 'Mylan N.V.'],
 ];
 
-for (let i = 0; i < 100; i += 1) {
-  const descriptor = faker.company.catchPhraseDescriptor();
-  const descriptor2 = faker.lorem.sentence();
-  const descriptor3 = faker.company.catchPhraseDescriptor();
-  const descriptor4 = faker.lorem.sentence();
-  const material = faker.commerce.productMaterial();
-  const adjective = faker.commerce.productAdjective();
-  const bs1 = faker.company.bs();
-  const bs2 = faker.company.bs();
-  const bs3 = faker.company.bs();
-  const bs4 = faker.company.bs();
+class Seed {
+  constructor() {
+    this.count = 0;
+    this.stock = [];
+    this.initialize = this.initialize.bind(this);
+    this.makeBS = this.makeBS.bind(this);
+    this.saveDB = this.saveDB.bind(this);
+    this.debug = this.debug.bind(this);
+  }
 
-  const sampleStocks = [{
-    symbol: symbolsNames[i][0],
-    recBuy: faker.random.number(20),
-    recHold: faker.random.number(20),
-    recSell: faker.random.number(20),
-    reviewBuy: `${material} ${bs1} ${symbolsNames[i][1]} ${descriptor} ${adjective}. \n The ${bs2} ${descriptor2}. \n Overall, ${bs1} ${symbolsNames[i][1]} ${descriptor3} ${descriptor4}`,
-    reviewSell: `${material} ${bs3} ${descriptor} ${symbolsNames[i][1]} ${adjective}. \n For ${bs4} ${descriptor2}. \n Hence, ${bs3} ${symbolsNames[i][1]} ${descriptor3} ${descriptor4}`,
-  }];
+  makeBS(i) {
+    const descriptor = faker.company.catchPhraseDescriptor();
+    const descriptor2 = faker.lorem.sentence();
+    const descriptor3 = faker.company.catchPhraseDescriptor();
+    const descriptor4 = faker.lorem.sentence();
+    const material = faker.commerce.productMaterial();
+    const adjective = faker.commerce.productAdjective();
+    const bs1 = faker.company.bs();
+    const bs2 = faker.company.bs();
+    const bs3 = faker.company.bs();
+    const bs4 = faker.company.bs();
+  
+    this.stock = [{
+      symbol: tickerNames[i][0],
+      company: tickerNames[i][1],
+      recBuy: faker.random.number(20),
+      recHold: faker.random.number(20),
+      recSell: faker.random.number(20),
+      reviewBuy: `${material} ${bs1} ${tickerNames[i][1]} ${descriptor} ${adjective}. \n The ${bs2} ${descriptor2}. \n Overall, ${bs1} ${tickerNames[i][1]} ${descriptor3} ${descriptor4}`,
+      reviewSell: `${material} ${bs3} ${descriptor} ${tickerNames[i][1]} ${adjective}. \n For ${bs4} ${descriptor2}. \n Hence, ${bs3} ${tickerNames[i][1]} ${descriptor3} ${descriptor4}`,
+    }];
+  }
 
-  const insertSampleStocks = () => {
-    Stock.create(sampleStocks)
+  saveDB() {
+    Stock.create(this.stock)
       .then(() => db.close())
       .catch(err => console.log(`Error saving data to database: ${err}`));
-  };
+  }
+  
+  debug() {
+    console.log(this.stock);
+  }
 
-  insertSampleStocks();
+  initialize(current) {
+    this.count = current;
+    this.makeBS(this.count);
+    this.saveDB();
+  }
+}
+
+const seedOne = new Seed();
+
+for (let x = 0; x < tickerNames.length; x++) {
+  seedOne.initialize(x);
 }
