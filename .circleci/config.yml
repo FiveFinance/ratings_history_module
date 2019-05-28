@@ -2,15 +2,8 @@ version: 2
 jobs:
   build:
     docker:
-      # specify the version you desire here
       - image: circleci/node:8.15.1
 
     steps:
       - checkout
-      - run: cd ratings
-      - run: npm install
-      - run: npm run test
-      - run: cd ..
-      - run: cd history
-      - run: npm install
-      - run: npm run test
+      - run: cd ratings && npm install && npm run test && cd .. && cd history && npm install && npm run test
