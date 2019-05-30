@@ -1,6 +1,5 @@
 # Repository for Ratings microservice and Purchase History microservice
 
-## Description
 The Analyst Ratings module displays data and expert recommendations in an accessible and user-friendly UI. As a potential customer, I want to be able to easily and confidently determine whether I should buy, hold, or sell.
 
 The Purchase History module renders a dynamic and individually expanding list of past purchases. As an existing customer, I want to see my history of past purchases so that I can see that I am making good purchasing decisions and/or improve future decisions. 
@@ -37,7 +36,11 @@ Vickie Huang
 
 ### Ratings Microservice
 
-![](ratings_demo.gif)
+![](zReadMoreLess.gif)
+
+![](zSwitchingStocks.gif)
+
+![](zConditionalColors.gif)
 
 ### History Microservice
 
