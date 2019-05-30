@@ -8,7 +8,7 @@ const db = mongoose.connection;
 
 db.once('open', () => {
   // console.log('Now connected to MongoDB database, Heroku mLab addon');
-  console.log('Now connected to MongoDB database...');
+  process.stdout.write('Now connected to MongoDB database...');
 });
 
 module.exports = db;

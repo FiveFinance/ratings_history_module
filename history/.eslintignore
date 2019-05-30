@@ -2,3 +2,4 @@ bundle.*
 *.config.js
 /coverage/**
 /dist/*
+*.json
