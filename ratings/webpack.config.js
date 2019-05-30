@@ -6,8 +6,8 @@ const DIST_DIR = path.join(__dirname, 'client/dist');
 
 const webpack = require('webpack');
 const CompressionPlugin = require('compression-webpack-plugin');
+const BrotliPlugin = require('brotli-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
-
 
 module.exports = {
   entry: ['babel-polyfill', `${SRC_DIR}/index.jsx`],
@@ -38,6 +38,7 @@ module.exports = {
   resolve: { extensions: ['*', '.js', '.jsx'] },
   plugins: [
     new CompressionPlugin(),
+    new BrotliPlugin(),
     new BundleAnalyzerPlugin(),
     new webpack.DefinePlugin({
       'process.env': {
