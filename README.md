@@ -4,6 +4,8 @@ The Analyst Ratings module displays data and expert recommendations in an access
 
 The Purchase History module renders a dynamic and individually expanding list of past purchases. As an existing customer, I want to see my history of past purchases so that I can see that I am making good purchasing decisions and/or improve future decisions. 
 
+[Check out the deployed version here](http://ec2-18-221-144-48.us-east-2.compute.amazonaws.com:3001/stocks/T/) and [here](http://ec2-18-221-144-48.us-east-2.compute.amazonaws.com:3011/stocks/T/). 
+
 ## Getting Started
 
 * Change directory into each module/microservice
@@ -45,3 +47,8 @@ Vickie Huang
 ### History Microservice
 
 ![](history_demo.gif)
+
+## Future work
+
+* re-add search bar
+* LL purchases
