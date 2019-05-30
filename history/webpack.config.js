@@ -32,17 +32,17 @@ module.exports = {
     ],
   },
   resolve: { extensions: ['*', '.js', '.jsx'] },
-  plugins: [
-    new CompressionPlugin(),
-    new BrotliPlugin(),
-    new BundleAnalyzerPlugin(),
-    new webpack.DefinePlugin({
-      'process.env': {
-        NODE_ENV: JSON.stringify('production'),
-      },
-    }),
-    new webpack.optimize.AggressiveMergingPlugin(),
-  ],
+  // plugins: [
+  //   new CompressionPlugin(),
+  //   new BrotliPlugin(),
+  //   new BundleAnalyzerPlugin(),
+  //   new webpack.DefinePlugin({
+  //     'process.env': {
+  //       NODE_ENV: JSON.stringify('production'),
+  //     },
+  //   }),
+  //   new webpack.optimize.AggressiveMergingPlugin(),
+  // ],
   stats: {
     warnings: false,
   },
