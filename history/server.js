@@ -5,6 +5,12 @@ const Purchase = require('./database-mongodb/Stock2.js');
 const app = express();
 const PORT = 3011;
 
+app.get('*.js', (req, res, next) => {
+  req.url += '.gz';
+  res.set('Content-Encoding', 'gzip');
+  next();
+});
+
 app.use('/', express.static(path.join(__dirname, 'client/dist')));
 app.use('/stocks/:stockid', express.static(path.join(__dirname, 'client/dist')));
 
@@ -12,12 +18,12 @@ app.get('/api/history/:stockID', (req, res) => {
   Purchase
     .find({ symbol: req.params.stockID.toUpperCase() })
     .exec((err, data) => {
-    if (err) {
-      console.log(`Error: ${err}`);
-      res.status(500).send(err);
-    }
-    res.status(200).send(data);
-  });
+      if (err) {
+        console.log(`Error: ${err}`);
+        res.status(500).send(err);
+      }
+      res.status(200).send(data);
+    });
 });
 
 const server = app.listen(PORT, () => {

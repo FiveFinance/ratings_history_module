@@ -3,10 +3,10 @@ import styled from 'styled-components';
 import PropTypes from 'prop-types';
 import Review from './Review';
 
-const ReviewList = props => (
+const ReviewList = ({ stock, market }) => (
   <AllReviews>
-    <Review oneReview={props.stock.reviewBuy} miniHeader="Buy Summary" market={props.market} />
-    <Review oneReview={props.stock.reviewSell} miniHeader="Sell Summary" market={props.market} />
+    <Review oneReview={stock.reviewBuy} miniHeader="Buy Summary" market={market} />
+    <Review oneReview={stock.reviewSell} miniHeader="Sell Summary" market={market} />
   </AllReviews>
 );
 
@@ -19,7 +19,12 @@ const AllReviews = styled.div`
 `;
 
 ReviewList.propTypes = {
-  stock: PropTypes.object,
+  stock: PropTypes.shape({
+    buy: PropTypes.number,
+    hold: PropTypes.number,
+    sell: PropTypes.number,
+  }).isRequired,
+  market: PropTypes.string.isRequired,
 };
 
 export default ReviewList;

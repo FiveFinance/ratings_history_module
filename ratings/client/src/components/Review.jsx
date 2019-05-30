@@ -1,7 +1,16 @@
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
-import { TriangleDown } from 'styled-icons/octicons/TriangleDown';
+// import { TriangleDown } from 'styled-icons/octicons/TriangleDown';
+import Triangle from './Triangle.svg';
+
+const BULL = '#21ce99';
+const BEAR = '#f45531';
+const BLACK = '#171718';
+const BULLHOVER = '#1ae9aa';
+const BEARHOVER = '#ff6340';
+const REVIEWBG = '#f7f7f8';
+const GRAY = '#cbcbcd';
 
 class Review extends React.Component {
   constructor(props) {
@@ -9,8 +18,9 @@ class Review extends React.Component {
     this.state = {
       expanded: false,
     };
-    this.market = this.props.market;
-    this.miniHeader = this.props.miniHeader; 
+    const { market, miniHeader } = this.props;
+    this.market = market;
+    this.miniHeader = miniHeader;
     this.toggleReadMore = this.toggleReadMore.bind(this);
   }
 
@@ -22,32 +32,34 @@ class Review extends React.Component {
   }
 
   render() {
-    if (this.state.expanded === true) {
+    const { expanded } = this.state;
+    const { miniHeader, oneReview, market } = this.props;
+    if (expanded === true) {
       return (
         <div>
           <ReviewWrapper>
-            <ReviewBox expanded={this.state.expanded}>
+            <ReviewBox expanded={expanded}>
               <InnerContainer>
-                <Summary>{this.props.miniHeader}</Summary>
+                <Summary>{miniHeader}</Summary>
                 <FirstPara>
                   <p>
-                    <span>&#8220;</span>
-                    {this.props.oneReview.split('\n', 3)[0]}
+                    <span>&#34;</span>
+                    {oneReview.split('\n', 3)[0]}
                   </p>
                 </FirstPara>
                 <RDetails>
                   <p key="reviewp1">
-                    {this.props.oneReview.split('\n', 3)[1]}
+                    {oneReview.split('\n', 3)[1]}
                   </p>
                   <p key="reviewp2">
-                    {this.props.oneReview.split('\n', 3)[2]}
+                    {oneReview.split('\n', 3)[2]}
                     <span>&#8221;</span>
                   </p>
                 </RDetails>
               </InnerContainer>
             </ReviewBox>
             <InnerContainer>
-              <ReadMore><a href="/" onClick={e => this.toggleReadMore(e)}>{this.state.expanded === true ? 'Read Less' : 'Read More'}</a></ReadMore>
+              <ReadMore market={market} onClick={e => this.toggleReadMore(e)}>{expanded === true ? 'Read Less' : 'Read More'}</ReadMore>
               <ReviewCaption>Morningstar</ReviewCaption>
             </InnerContainer>
           </ReviewWrapper>
@@ -58,20 +70,19 @@ class Review extends React.Component {
     return (
       <div>
         <ReviewWrapper>
-          <ReviewBox expanded={this.state.expanded}>
+          <ReviewBox expanded={expanded}>
             <InnerContainer>
-            <Summary>{this.props.miniHeader}</Summary>
+              <Summary>{miniHeader}</Summary>
               <FirstPara>
                 <p>
                   <span>&#34;</span>
-                  {this.props.oneReview.split('\n', 3)[0]}
+                  {oneReview.split('\n', 3)[0]}
                 </p>
               </FirstPara>
-              
             </InnerContainer>
           </ReviewBox>
           <InnerContainer>
-            <ReadMore><a href="/" onClick={e => this.toggleReadMore(e)}>{this.state.expanded === true ? 'Read Less' : 'Read More'}</a></ReadMore>
+            <ReadMore market={market} onClick={e => this.toggleReadMore(e)}>{expanded === true ? 'Read Less' : 'Read More'}</ReadMore>
             <ReviewCaption>Morningstar</ReviewCaption>
           </InnerContainer>
         </ReviewWrapper>
@@ -93,8 +104,8 @@ const ReviewWrapper = styled.div`
   padding: 0 24px 24px;
   margin-top: 6px;
   width: 180px;
-  background-color: rgba(23, 23, 24, 0.02);
-  color: #171718;
+  background-color: ${REVIEWBG};
+  color: ${BLACK};
   padding-bottom: 16px;
 `;
 
@@ -124,7 +135,7 @@ const ReviewBox = styled.div`
 
   p {
     text-align: left;
-    color: #171718;
+    color: ${BLACK};
     font-family: "DIN Pro", -apple-system, system-ui, sans-serif;
     font-weight: normal;
     font-size: 13px;
@@ -137,24 +148,30 @@ const ReviewBox = styled.div`
     transition: background 1250ms, margin-bottom 1250ms, -webkit-box-shadow 1250ms;
     transition: background 1250ms, box-shadow 1250ms, margin-bottom 1250ms;
     transition: background 1250ms, box-shadow 1250ms, margin-bottom 1250ms, -webkit-box-shadow 1250ms;
-    
 `;
 
 const ReadMore = styled.div`
- -webkit-text-stroke-width: 0.5px;
+  -webkit-text-stroke-width: 0.5px;
+  text-decoration: none;
+  font-size: 13px;
+  line-height: 19px;
+  text-align: start;  
+  letter-spacing: 0.05px; 
   color: ${props => (props.market === 'Bear'
-    ? '#f45531'
-    : '#21ce99')};
+    ? BEAR
+    : BULL)};
+    
   &:hover {
     color: ${props => (props.market === 'Bear'
-    ? '#ff6340'
-    : '#1ae9aa')}
+    ? BEARHOVER
+    : BULLHOVER)}
     transition-duration: 300ms;
+    cursor: grab;
   }
 `;
 
 const ReviewCaption = styled.div`
-  color: #cbcbcd;
+  color: ${GRAY};
   font-family: "DIN Pro", -apple-system, system-ui, sans-serif;
   font-weight: normal;
   font-size: 13px;
@@ -162,21 +179,32 @@ const ReviewCaption = styled.div`
   letter-spacing: 0.2px;
   text-align: left;
   &:hover {
-    color: #cbcbcd;
+    color: ${GRAY};
   }
   padding-top: 16px;
   padding-bottom: 6px;
 `;
 
-const ReviewTriangle = styled(TriangleDown)`
-  border-radius: 4px 4px 4px 0;
-  margin-top: -15px;
-  height: 48px;
-  color: rgba(23, 23, 24, 0.02);
-`;
+const ReviewTriangle = () => (
+  <img src={Triangle} alt="Triangle" width="24px" height="24px" />
+);
+// const ReviewTriangle = styled(TriangleDown)`
+//   border-radius: 4px 4px 4px 0;
+//   margin-top: -15px;
+//   height: 48px;
+//   color: rgba(23, 23, 24, 0.02);
+// `;
 
 Review.propTypes = {
-  oneReview: PropTypes.string,
+  oneReview: PropTypes.string.isRequired,
+  miniHeader: PropTypes.string.isRequired,
+  market: PropTypes.string.isRequired,
 };
+
+// Review.defaultProps = {
+//   oneReview: 'Placeholder review',
+//   miniHeader: 'Buy Me',
+//   market: 'Bull',
+// };
 
 export default Review;

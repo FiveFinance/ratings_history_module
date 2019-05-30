@@ -1,3 +1,5 @@
+/* eslint-disable no-bitwise */
+// eslint-disable-next-line no-underscore-dangle
 require('events').EventEmitter.prototype._maxListeners = 100;
 const { commerce, company, lorem } = require('faker');
 const db = require('./index.js');
@@ -127,13 +129,13 @@ class Seed {
     const bs2 = company.bs();
     const bs3 = company.bs();
     const bs4 = company.bs();
-  
+
     this.stock = [{
       symbol: tickerNames[i][0],
       company: tickerNames[i][1],
-      recBuy: Math.random()*20|0,
-      recHold: Math.random()*20|0,
-      recSell: Math.random()*20|0,
+      recBuy: (Math.random() * 20) + 10 | 0,
+      recHold: (Math.random() * 20) + 10 | 0,
+      recSell: (Math.random() * 20) + 10 | 0,
       reviewBuy: `${material} ${bs1} ${tickerNames[i][1]} ${descriptor} ${adjective}. \n The ${bs2} ${descriptor2}. \n Overall, ${bs1} ${tickerNames[i][1]} ${descriptor3} ${descriptor4}`,
       reviewSell: `${material} ${bs3} ${descriptor} ${tickerNames[i][1]} ${adjective}. \n For ${bs4} ${descriptor2}. \n Hence, ${bs3} ${tickerNames[i][1]} ${descriptor3} ${descriptor4}`,
     }];
@@ -142,11 +144,11 @@ class Seed {
   saveDB() {
     Stock.create(this.stock)
       .then(() => db.close())
-      .catch(err => console.log(`Error saving data to database: ${err}`));
+      .catch(err => process.stdout.write(`Error saving data to database: ${err}`));
   }
-  
+
   debug() {
-    console.log(this.stock);
+    process.stdout.write(this.stock);
   }
 
   initialize(current) {
@@ -158,6 +160,6 @@ class Seed {
 
 const seedOnce = new Seed();
 
-for (let x = 0; x < 100; x++) {
+for (let x = 0; x < 100; x += 1) {
   seedOnce.initialize(x);
 }

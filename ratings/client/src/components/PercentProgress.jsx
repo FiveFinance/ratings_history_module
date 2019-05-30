@@ -1,19 +1,30 @@
+/* eslint-disable no-nested-ternary */
 import React from 'react';
 import styled from 'styled-components';
 import PropTypes from 'prop-types';
 
-const PercentProgress = props => (
+const BULL = '#21ce99';
+const BEAR = '#f45531';
+const BLACK = '#171718';
+const BULLBAR = 'rgba(33, 206, 153, 0.9)';
+const BEARBAR = 'rgba(244, 85, 49, 0.9)';
+const BULLGRADIENT = 'linear-gradient(90deg, rgba(33, 206, 153, 0.01), rgba(33, 206, 153, 0.15) 8%)';
+const BEARGRADIENT = 'linear-gradient(90deg, rgba(244, 85, 49, 0.01), rgba(244, 85, 49, 0.15) 8%)';
+const BLACKGRADIENT = 'linear-gradient(90deg, rgba(23, 23, 24, 0.01), rgba(23, 23, 24, 0.15) 8%)';
+
+const PercentProgress = ({
+  votes, total, voteFor, market,
+}) => (
   <AllBars>
-    <VoteFor voteFor={props.voteFor} >
-      {props.voteFor}
+    <VoteFor voteFor={voteFor} market={market}>
+      {voteFor}
       &nbsp;
     </VoteFor>
-    <ProgressBar voteFor={props.voteFor} >
-      <Filler percentage={Math.floor(100 * props.votes / props.total)} voteFor={props.voteFor}>
+    <ProgressBar voteFor={voteFor} market={market}>
+      <Filler percentage={Math.floor(100 * votes / total)} voteFor={voteFor} market={market}>
         <Percent>
-          {Math.floor(100 * props.votes / props.total)}
-          %
-          <PercentBG percentage={Math.floor(100 * props.votes / props.total)} voteFor={props.voteFor} />
+          {`${Math.floor(100 * votes / total)}%`}
+          <PercentBG percentage={Math.floor(100 * votes / total)} voteFor={voteFor} market={market} />
         </Percent>
       </Filler>
     </ProgressBar>
@@ -32,18 +43,22 @@ const AllBars = styled.div`
 const VoteFor = styled.div`
   width: 36px;
   height: 19px;
-  color: ${props => (props.voteFor === 'Buy'
-    ? '#21ce99'
-    : '#171718')};
+  color: ${({ voteFor, market }) => (voteFor === 'Buy'
+    ? market === 'Bear'
+      ? BEAR
+      : BULL
+    : BLACK)};
   display: flex;
 `;
 
 const ProgressBar = styled.div`
   width: 426px;
   height: 6px;
-  color: ${props => (props.voteFor === 'Buy'
-    ? 'rgba(33, 206, 153, 0.9)'
-    : '#171718')};
+  color: ${({ voteFor, market }) => (voteFor === 'Buy'
+    ? market === 'Bear'
+      ? BEARBAR
+      : BULLBAR
+    : BLACK)};
   background: #ffffff;
   border-radius: 4px;
   margin: 24px 0;
@@ -51,24 +66,28 @@ const ProgressBar = styled.div`
 `;
 
 const Filler = styled.div`
-  background: ${props => (props.voteFor === 'Buy'
-    ? '#21ce99'
-    : '#171718')};
+  background: ${({ voteFor, market }) => (voteFor === 'Buy'
+    ? market === 'Bear'
+      ? BEAR
+      : BULL
+    : BLACK)};
   height: 100%;
   border-radius: 4px 0 0 4px;
-  width: ${props => (props.percentage / 100) * 426 - 2}px;
-  text-indent: ${props => (props.percentage / 100) * 426}px;
+  width: ${({ percentage }) => (percentage / 100) * 426 - 2}px;
+  text-indent: ${({ percentage }) => (percentage / 100) * 426}px;
   display: flex;
 `;
 
 const PercentBG = styled.div`
     margin-left: 0;
-    width: ${props => ((426) - 8 - ((props.percentage / 100) * 426))}px;
+    width: ${({ percentage }) => ((426) - 8 - ((percentage / 100) * 426))}px;
     height: 6px;
     border-radius: 4px;
-    background: ${props => (props.voteFor === 'Buy'
-    ? 'linear-gradient(90deg, rgba(33, 206, 153, 0.01), rgba(33, 206, 153, 0.15) 8%)'
-    : 'linear-gradient(90deg, rgba(23, 23, 24, 0.01), rgba(23, 23, 24, 0.15) 8%)')};
+    background: ${({ voteFor, market }) => (voteFor === 'Buy'
+    ? market === 'Bear'
+      ? BEARGRADIENT
+      : BULLGRADIENT
+    : BLACKGRADIENT)};
  
     display: flex;
     align-self: center;
@@ -80,11 +99,14 @@ const Percent = styled.div`
 `;
 
 PercentProgress.propTypes = {
-  buy: PropTypes.number,
-  hold: PropTypes.number,
-  sell: PropTypes.number,
-  total: PropTypes.number,
-  voteFor: PropTypes.string,
+  total: PropTypes.number.isRequired,
+  voteFor: PropTypes.string.isRequired,
+  votes: PropTypes.number.isRequired,
+  market: PropTypes.string.isRequired,
 };
+
+// PercentProgress.defaultProps = {
+//   market: 'Bull',
+// };
 
 export default PercentProgress;

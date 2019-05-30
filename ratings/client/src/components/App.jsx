@@ -24,19 +24,6 @@ const Wrapper = styled.div`
     font-family: "DIN Pro", -apple-system, system-ui, sans-serif;
     font-weight: normal;
   }
-
-  a {
-    color: #21ce99;
-    text-decoration: none;
-    font-size: 13px;
-    line-height: 19px;
-    text-align: start;  
-    letter-spacing: 0.05px; 
-  }
-  a:hover {
-    color: #1ae9aa;
-    transition-duration: 300ms;
-  }
 `;
 
 export default HistoryApp;

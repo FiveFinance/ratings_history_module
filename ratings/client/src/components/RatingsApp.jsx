@@ -12,16 +12,17 @@ class RatingsApp extends React.Component {
       stock: {
         symbol: 'PHDR',
         company: 'Placeholder Company',
-        recBuy: 11,
-        recHold: 15,
+        recBuy: 18,
+        recHold: 18,
         recSell: 18,
-        reviewBuy: 'Rubber killer recontextualize web services Microsoft Corporation impactful Gorgeous. \n The viral envisioneer initiatives Et perspiciatis error quas.. \n Overall, killer recontextualize web services Microsoft Corporation reciprocal Doloribus numquam expedita sed fugit tempore in adipisci.',
-        reviewSell: 'Rubber open-source envisioneer channels impactful Microsoft Corporation Gorgeous. \n For sexy strategize bandwidth Et perspiciatis error quas.. \n Hence, open-source envisioneer channels Microsoft Corporation reciprocal Doloribus numquam expedita sed fugit tempore in adipisci.',
+        reviewBuy: 'Rubber killer recontextualize web services Placeholder impactful Gorgeous. \n The viral envisioneer initiatives Et perspiciatis error quas.. \n Overall, killer recontextualize web services Microsoft Corporation reciprocal Doloribus numquam expedita sed fugit tempore in adipisci.',
+        reviewSell: 'Rubber open-source envisioneer channels impactful Placeholder Gorgeous. \n For sexy strategize bandwidth Et perspiciatis error quas.. \n Hence, open-source envisioneer channels Microsoft Corporation reciprocal Doloribus numquam expedita sed fugit tempore in adipisci.',
       },
       market: 'Bull',
     };
     // this.market = this.state.pricedifferenceFromStartToToday === 'Negative' ? 'Bear' : 'Bull';
     this.getStockData = this.getStockData.bind(this);
+    this.updateMarket = this.updateMarket.bind(this);
   }
 
   componentDidMount() {
@@ -31,13 +32,13 @@ class RatingsApp extends React.Component {
   getStockData() {
     const stockID = window.location.pathname.split('/')[2];
     if (!stockID) {
-      axios.get(`/api/ratings/AAPL`)
-      .then(res => res.data)
-      .then((result) => {
-        this.setState({
-          stock: result[0],
+      axios.get('/api/ratings/AAPL')
+        .then(res => res.data)
+        .then((result) => {
+          this.setState({
+            stock: result[0],
+          });
         });
-      });
     } else {
       axios.get(`/api/ratings/${stockID}`)
         .then(res => res.data)
@@ -49,17 +50,26 @@ class RatingsApp extends React.Component {
     }
   }
 
+  updateMarket(e) {
+    const { market } = this.state;
+    e.preventDefault();
+    this.setState({
+      market: market === 'Bull' ? 'Bear' : 'Bull',
+    });
+  }
+
   render() {
+    const { stock, market } = this.state;
     return (
       <div>
         <ModuleHeader>Analyst Ratings</ModuleHeader>
         <Row>
           <Left>
-            <DataSpotlight stock={this.state.stock} />
+            <DataSpotlight stock={stock} market={market} updateMarket={this.updateMarket} />
           </Left>
           <Right>
-            <DataBarChart stock={this.state.stock} />
-            <ReviewList stock={this.state.stock} />
+            <DataBarChart stock={stock} market={market} />
+            <ReviewList stock={stock} market={market} />
           </Right>
         </Row>
       </div>

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import styled from 'styled-components';
-import moment from 'moment';
+import dayjs from 'dayjs';
 
 class Purchase extends React.Component {
   constructor(props) {
@@ -21,37 +21,38 @@ class Purchase extends React.Component {
   }
 
   render() {
+    const { expanded } = this.state;
     const { purchase } = this.props;
     const { name, timeinforce, submitted, status, enteredQuantity, filled, filledQuantityShares, filledQuantityPrice, total } = purchase;
     const submitTime = submitted.toString();
     const filledTime = filled.toString();
 
-    if (this.state.expanded === false) {
+    if (expanded === false) {
       return (
-        <PurchaseWrapper expanded={this.state.expanded} onClick={e => this.toggleReadMore(e)}>
+        <PurchaseWrapper expanded={expanded} onClick={e => this.toggleReadMore(e)}>
           <Expandable>
             <TopInfo>
               <div className="bold left">{this.type}</div>
-              {moment(submitTime).format('MMM DD')}
+              {dayjs(submitTime).format('MMM DD')}
             </TopInfo>
             <TopInfo>
-              <div className="bold right">${total}</div>
-              {filledQuantityShares} {filledQuantityShares === 1 ? 'share' : 'shares'} at ${filledQuantityPrice}
+              <div className="bold right">{`$${total}`}</div>
+              {`${filledQuantityShares} ${filledQuantityShares === 1 ? 'share' : 'shares'} at ${filledQuantityPrice}`}
             </TopInfo>
           </Expandable>
         </PurchaseWrapper>
       );
     }
     return (
-      <PurchaseWrapper expanded={this.state.expanded} onClick={e => this.toggleReadMore(e)}>
+      <PurchaseWrapper expanded={expanded} onClick={e => this.toggleReadMore(e)}>
         <Expandable>
           <TopInfo>
             <div className="bold left">{this.type}</div>
-            {moment(submitTime).format('MMM DD')}
+            {dayjs(submitTime).format('MMM DD')}
           </TopInfo>
           <TopInfo>
-            <div className="bold right">${total}</div>
-            {filledQuantityShares} {filledQuantityShares === 1 ? 'share' : 'shares'} at ${filledQuantityPrice}
+            <div className="bold right">{`$${total}`}</div>
+            {`${filledQuantityShares} ${filledQuantityShares === 1 ? 'share' : 'shares'} at ${filledQuantityPrice}`}
           </TopInfo>
         </Expandable>
 
@@ -70,7 +71,7 @@ class Purchase extends React.Component {
           </Info>
           <Info>
             <div className="key">Submitted</div>
-            <div className="value">{moment(submitTime).format('MMM DD, YYYY')}</div>
+            <div className="value">{dayjs(submitTime).format('MMM DD, YYYY')}</div>
           </Info>
           <Info>
             <div className="key">Status</div>
@@ -82,7 +83,7 @@ class Purchase extends React.Component {
           </Info>
           <Info>
             <div className="key">Filled</div>
-            <div className="value">{moment(filledTime).format('LLL') + ' EDT'}</div>
+            <div className="value">{dayjs(filledTime).format('LLL') + ' EDT'}</div>
           </Info>
           <Info>
             <div className="key">Filled Quantity</div>

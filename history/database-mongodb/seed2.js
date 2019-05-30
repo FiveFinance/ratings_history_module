@@ -118,7 +118,7 @@ class Seed2 {
   makeBS(i) {
     const samplePurchaseDateRange = faker.date.between('2015-03-03', '2019-02-02');
     const sampleQuantity = faker.random.number(100) + 1;
-  
+
     this.stock = [{
       symbol: tickerNames[i][0],
       purchase_id: faker.random.number(12131, 80123),
@@ -139,7 +139,7 @@ class Seed2 {
       .then(() => db.close())
       .catch(err => console.log(`Error saving data to database: ${err}`));
   }
-  
+
   debug() {
     console.log(this.stock);
   }
@@ -153,6 +153,6 @@ class Seed2 {
 
 const seedOnce = new Seed2();
 
-for (let x = 0; x < tickerNames.length; x++) {
+for (let x = 0; x < tickerNames.length; x += 1) {
   seedOnce.initialize(x);
 }

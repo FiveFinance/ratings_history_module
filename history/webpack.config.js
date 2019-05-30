@@ -4,6 +4,10 @@ const path = require('path');
 const SRC_DIR = path.join(__dirname, '/client/src');
 const DIST_DIR = path.join(__dirname, '/client/dist');
 
+const webpack = require('webpack');
+const CompressionPlugin = require('compression-webpack-plugin');
+const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
+
 module.exports = {
   entry: ['babel-polyfill', `${SRC_DIR}/index.jsx`],
   output: {
@@ -27,4 +31,17 @@ module.exports = {
     ],
   },
   resolve: { extensions: ['*', '.js', '.jsx'] },
+  plugins: [
+    new CompressionPlugin(),
+    new BundleAnalyzerPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+    new webpack.optimize.AggressiveMergingPlugin(),
+  ],
+  stats: {
+    warnings: false,
+  },
 };

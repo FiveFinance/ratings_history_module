@@ -2,6 +2,11 @@ module.exports = {
   // Automatically clear mock calls and instances between every test
   clearMocks: true,
 
+  // ignore images
+  moduleNameMapper: {
+    '\\.(css|jpg|png|svg)$': '<rootDir>/empty-module.js',
+  },
+
   // // An array of glob patterns indicating a set of files for which coverage information should be collected
   // collectCoverageFrom: ['ratings/client/src/**/*.{js,jsx,mjs}',
   //   'history/client/src/**/*.{js,jsx,mjs}',
