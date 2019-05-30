@@ -1,6 +1,6 @@
 const mongoose = require('mongoose');
 
-const mongoUri = 'mongodb://localhost/fec_ratings';
+const mongoUri = 'mongodb://localhost/fec_history';
 // const mongoUri = 'mongodb://heroku_1lxm7wjq:nee5ir7pvpnk9b50l6luc8k8bp@ds259241.mlab.com:59241/heroku_1lxm7wjq';
 
 mongoose.connect(mongoUri, { useNewUrlParser: true });
