@@ -12,7 +12,6 @@
     "eslintfix": "node_modules/eslint/bin/eslint.js --fix .",
     "stats": "webpack --profile --json > stats.json",
     "compile": "webpack --watch --mode=production",
-    "postinstall": "webpack && npm run db:setup",
     "db:setup": "node database-mongodb/seed.js",
     "start-dev": "nodemon server.js"
   },
