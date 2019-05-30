@@ -6,9 +6,16 @@ const app = express();
 const PORT = 3001;
 
 app.get('*.js', (req, res, next) => {
-  req.url += '.gz';
-  res.set('Content-Encoding', 'gzip');
-  next();
+  const encodings = req.acceptsEncodings();
+  if (encodings.includes('br')) {
+    req.url += '.br';
+    res.set('Content-Encoding', 'br');
+    next();
+  } else if (encodings.includes('gzip')) {
+    req.url += '.gz';
+    res.set('Content-Encoding', 'gzip');
+    next();
+  }
 });
 
 app.use('/', express.static(path.join(__dirname, 'client/dist')));
