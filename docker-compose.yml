@@ -1,0 +1,40 @@
+version: '3.2'
+
+services:
+  
+  # Define the service which will be spun up into a container
+  history: 
+
+    # Where to find the Dockerfile
+    build: history/
+
+    # Control the startup order of the containers once Compose builds them
+    depends_on:
+      - 'database'
+
+    # Map the port on the host to the exposed port on the container
+    ports:
+      - '3011:3011'
+    
+  # Define the service which will be spun up into a container
+  ratings: 
+
+    # Where to find the Dockerfile
+    build: ratings/
+
+    # Control the startup order of the containers once Compose builds them
+    depends_on:
+      - 'database'
+
+    # Map the port on the host to the exposed port on the container
+    ports:
+      - '3001:3001'
+  
+  # Define the database service
+  database:
+
+    # Spin up a container from the 'mongo:latest' image cached on the machine, or pull from Dockerhub
+    image: mongo:latest
+
+    # command: mongod --port 27017
+    # expose: '27017'
