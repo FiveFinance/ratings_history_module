@@ -59,13 +59,13 @@ class HistoryApp extends React.Component {
   getPurchaseData() {
     const stockID = window.location.pathname.split('/')[2];
     if (!stockID) {
-      axios.get(`/api/history/AAPL`)
-      .then(res => res.data)
-      .then((result) => {
-        this.setState({
-          stock: result[0],
+      axios.get('/api/history/AAPL')
+        .then(res => res.data)
+        .then((result) => {
+          this.setState({
+            purchases: result[0],
+          });
         });
-      });
     } else {
       axios.get(`/api/history/${stockID}`)
         .then(res => res.data)

@@ -83,11 +83,11 @@ class Purchase extends React.Component {
           </Info>
           <Info>
             <div className="key">Filled</div>
-            <div className="value">{dayjs(filledTime).format('LLL') + ' EDT'}</div>
+            <div className="value">{`${dayjs(filledTime).format('LLL')} EDT`}</div>
           </Info>
           <Info>
             <div className="key">Filled Quantity</div>
-            <div className="value">{filledQuantityShares} {filledQuantityShares === 1 ? 'share' : 'shares'} at ${filledQuantityPrice}</div>
+            <div className="value">{`${filledQuantityShares} ${filledQuantityShares === 1 ? 'share' : 'shares'} at ${filledQuantityPrice}`}</div>
           </Info>
           <Info>
             <div className="key">Total</div>
@@ -214,7 +214,19 @@ const DownloadTC = styled.div`
 `;
 
 Purchase.propTypes = {
-  purchase: PropTypes.object,
+  purchase: PropTypes.shape({
+    symbol: PropTypes.string,
+    purchase_id: PropTypes.number,
+    name: PropTypes.string,
+    timeinforce: PropTypes.string,
+    submitted: PropTypes.string,
+    status: PropTypes.string,
+    enteredQuantity: PropTypes.number,
+    filled: PropTypes.string,
+    filledQuantityShares: PropTypes.number,
+    filledQuantityPrice: PropTypes.number,
+    total: PropTypes.number,
+  }).isRequired,
 };
 
 export default Purchase;
