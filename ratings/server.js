@@ -1,6 +1,6 @@
 const express = require('express');
 const path = require('path');
-const Stock = require('./database-mongodb/Stock.js');
+const Stock = require('./controller.js');
 
 const app = express();
 const PORT = 3001;
@@ -19,22 +19,17 @@ app.get('*.js', (req, res, next) => {
 });
 
 app.use('/', express.static(path.join(__dirname, 'client/dist')));
-app.use('/stocks/:stockid', express.static(path.join(__dirname, 'client/dist')));
+app.use('/stocks/:stockID', express.static(path.join(__dirname, 'client/dist')));
 
 app.get('/api/ratings/:stockID', (req, res) => {
   Stock
-    .find({ symbol: req.params.stockID.toUpperCase() })
-    .exec((err, data) => {
-      if (err) {
-        console.log(`Error: ${err}`);
-        res.status(500).send(err);
-      }
-      res.status(200).send(data);
-    });
+    .getStocks(req.params.stockID.toUpperCase())
+    .then(data => res.status(200).send(data))
+    .catch(err => res.status(500).send(err));
 });
 
 const server = app.listen(PORT, () => {
-  console.log(`server running at: http://localhost:${PORT}`);
+  process.stdout.write(`server running at: http://localhost:${PORT}. `);
 });
 
 module.exports = { server, app };

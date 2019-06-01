@@ -78,7 +78,7 @@ class HistoryApp extends React.Component {
   }
 
   render() {
-    const { purchases = [] } = this.state;
+    const { purchases } = this.state;
     return (
       <div>
         <ModuleHeader>History</ModuleHeader>

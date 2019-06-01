@@ -11,7 +11,7 @@ WORKDIR /src/app
 COPY . /src/app
 
 # Does your app have any dependencies that should be installed?
-RUN apk update && apk add -y vim
+RUN apk update && apk add vim
 
 RUN npm install
 RUN npm run compile

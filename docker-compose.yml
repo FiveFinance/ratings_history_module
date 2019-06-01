@@ -1,34 +1,47 @@
 version: '3.2'
 
 services:
-  
-  # Define the service which will be spun up into a container
-  history: 
 
-    # Where to find the Dockerfile
+  history: 
+    environment:
+      - NODE_ENV=production
+
     build: history/
 
-    # Control the startup order of the containers once Compose builds them
     depends_on:
       - 'database'
 
-    # Map the port on the host to the exposed port on the container
     ports:
       - '3011:3011'
     
-  # Define the service which will be spun up into a container
   ratings: 
+    environment:
+      - NODE_ENV=production
+
+    build: ratings/
+
+    depends_on:
+      - 'database'
+
+    ports:
+      - '3001:3001'
+
+  proxy: 
+    environment:
+      - NODE_ENV=production
 
     # Where to find the Dockerfile
-    build: ratings/
+    build: proxy/
 
     # Control the startup order of the containers once Compose builds them
     depends_on:
       - 'database'
+      - 'ratings'
+      - 'history'
 
     # Map the port on the host to the exposed port on the container
     ports:
-      - '3001:3001'
+      - '80:80'
   
   # Define the database service
   database:
@@ -38,19 +51,3 @@ services:
 
     # command: mongod --port 27017
     # expose: '27017'
-
-  # Define the service which will be spun up into a container
-  proxy: 
-
-    # Where to find the Dockerfile
-    build: proxy/
-
-    # Control the startup order of the containers once Compose builds them
-    depends_on:
-      - 'history'
-      - 'ratings'
-
-    # Map the port on the host to the exposed port on the container
-    ports:
-      - '80:80'
-    

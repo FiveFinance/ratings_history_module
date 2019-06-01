@@ -12,11 +12,11 @@ WORKDIR /src/app
 COPY . /src/app
 
 # Does your app have any dependencies that should be installed?
-RUN apk update && apk add -y vim
+RUN apk -U add vim
 RUN npm install
 
 # What port will the container talk to the outside world with once created?
 EXPOSE 80
 
 # How do you start your app?
-CMD ["npm", "run", "start"]
+CMD ["npm", "run", "startProxy"]

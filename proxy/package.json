@@ -5,10 +5,10 @@
   "main": "server.js",
   "browser": "./lib/browser.js",
   "scripts": {
-    "startProxy": "nodemon server.js",
+    "startProxy": "node server.js",
     "startHistory": "node ../history/server.js",
     "startRatings": "node ../ratings/server.js",
-    "start": "npm-run-all --parallel startProxy startHistory startRatings"
+    "start": "set NODE_ENV=production && npm-run-all --parallel startProxy startHistory startRatings"
   },
   "repository": {
     "type": "git",

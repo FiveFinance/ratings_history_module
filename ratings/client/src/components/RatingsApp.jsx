@@ -36,7 +36,7 @@ class RatingsApp extends React.Component {
         .then(res => res.data)
         .then((result) => {
           this.setState({
-            stock: result[0],
+            stock: result,
           });
         });
     } else {
@@ -44,7 +44,7 @@ class RatingsApp extends React.Component {
         .then(res => res.data)
         .then((result) => {
           this.setState({
-            stock: result[0],
+            stock: result,
           });
         });
     }

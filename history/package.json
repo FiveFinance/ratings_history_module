@@ -10,21 +10,15 @@
     "test:coverage": "jest --collectCoverage --colors -u",
     "eslint": "node_modules/eslint/bin/eslint.js .",
     "eslintfix": "node_modules/eslint/bin/eslint.js --fix .",
-    "stats": "webpack --profile --json > stats.json",
-    "compile": "webpack --mode=production",
+    "stats": "set NODE_ENV=development && webpack --profile --json > stats.json",
+    "compile": "set NODE_ENV=production && webpack --mode=production",
     "db:setup2": "node database-mongodb/seed2.js",
-    "start-dev": "nodemon server.js",
-    "start": "node server.js"
+    "start-dev": "set NODE_ENV=development && npm run webpack && nodemon server.js",
+    "start": "set NODE_ENV=production && node server.js"
   },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/FiveFinance/ratings_history_module.git"
-  },
-  "babel": {
-    "presets": [
-      "@babel/preset-env",
-      "@babel/preset-react"
-    ]
   },
   "private": true,
   "author": "Vickie Huang",

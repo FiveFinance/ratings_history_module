@@ -9,6 +9,8 @@ const CompressionPlugin = require('compression-webpack-plugin');
 const BrotliPlugin = require('brotli-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
+const dev = process.env.NODE_ENV !== 'production';
+
 module.exports = {
   entry: ['idempotent-babel-polyfill', `${SRC_DIR}/index.jsx`],
   output: {
@@ -23,6 +25,9 @@ module.exports = {
         include: SRC_DIR,
         use: {
           loader: 'babel-loader',
+          options: {
+            presets: ['@babel/preset-env', '@babel/preset-react'],
+          },
         },
       },
       {
@@ -32,17 +37,19 @@ module.exports = {
     ],
   },
   resolve: { extensions: ['*', '.js', '.jsx'] },
-  // plugins: [
-  //   new CompressionPlugin(),
-  //   new BrotliPlugin(),
-  //   new BundleAnalyzerPlugin(),
-  //   new webpack.DefinePlugin({
-  //     'process.env': {
-  //       NODE_ENV: JSON.stringify('production'),
-  //     },
-  //   }),
-  //   new webpack.optimize.AggressiveMergingPlugin(),
-  // ],
+  plugins: dev ? [
+    new CompressionPlugin(),
+    new BrotliPlugin(),
+  ] : [
+    new CompressionPlugin(),
+    new BrotliPlugin(),
+    new BundleAnalyzerPlugin(),
+    new webpack.DefinePlugin({
+      'process.env': {
+        NODE_ENV: JSON.stringify('production'),
+      },
+    }),
+  ],
   stats: {
     warnings: false,
   },
