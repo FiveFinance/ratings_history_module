@@ -10,7 +10,7 @@ const BrotliPlugin = require('brotli-webpack-plugin');
 const { BundleAnalyzerPlugin } = require('webpack-bundle-analyzer');
 
 module.exports = {
-  entry: ['babel-polyfill', `${SRC_DIR}/index.jsx`],
+  entry: ['idempotent-babel-polyfill', `${SRC_DIR}/index.jsx`],
   output: {
     filename: 'bundle.js',
     path: DIST_DIR,

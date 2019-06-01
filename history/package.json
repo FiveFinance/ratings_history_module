@@ -43,7 +43,6 @@
     "babel-core": "^6.26.3",
     "babel-jest": "^24.5.0",
     "babel-loader": "^8.0.5",
-    "babel-polyfill": "^6.26.0",
     "brotli-webpack-plugin": "^1.1.0",
     "compression-webpack-plugin": "^2.0.0",
     "css-loader": "^2.1.1",
@@ -67,7 +66,6 @@
     "webpack-cli": "^3.3.0"
   },
   "dependencies": {
-    "@babel/polyfill": "^7.4.0",
     "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "dayjs": "^1.8.14",
@@ -75,6 +73,7 @@
     "enzyme-adapter-react-16": "^1.13.2",
     "express": "^4.16.4",
     "faker": "^4.1.0",
+    "idempotent-babel-polyfill": "^7.0.0",
     "mongoose": "^5.4.20",
     "prop-types": "^15.7.2",
     "react": "^16.8.6",

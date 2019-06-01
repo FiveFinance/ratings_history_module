@@ -63,7 +63,7 @@ class HistoryApp extends React.Component {
         .then(res => res.data)
         .then((result) => {
           this.setState({
-            purchases: result[0],
+            purchases: result,
           });
         });
     } else {
@@ -78,7 +78,7 @@ class HistoryApp extends React.Component {
   }
 
   render() {
-    const { purchases } = this.state;
+    const { purchases = [] } = this.state;
     return (
       <div>
         <ModuleHeader>History</ModuleHeader>
