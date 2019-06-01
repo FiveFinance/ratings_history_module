@@ -38,3 +38,19 @@ services:
 
     # command: mongod --port 27017
     # expose: '27017'
+
+  # Define the service which will be spun up into a container
+  proxy: 
+
+    # Where to find the Dockerfile
+    build: proxy/
+
+    # Control the startup order of the containers once Compose builds them
+    depends_on:
+      - 'history'
+      - 'ratings'
+
+    # Map the port on the host to the exposed port on the container
+    ports:
+      - '80:80'
+    
