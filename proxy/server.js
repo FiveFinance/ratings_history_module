@@ -11,6 +11,19 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
+app.get('*.js', (req, res, next) => {
+  const encodings = req.acceptsEncodings();
+  if (encodings.includes('br')) {
+    req.url += '.br';
+    res.set('Content-Encoding', 'br');
+  } else if (encodings.includes('gzip')) {
+    req.url += '.gz';
+    res.set('Content-Encoding', 'gzip');
+  }
+  res.set('Content-Type', 'application/javascript');
+  next();
+});
+
 const setDefault = (req, res, next) => {
   if (!req.params.id) {
     req.params.id = 'AAPL';

@@ -20,8 +20,6 @@ RUN npm run db:setup2
 RUN npm run db:setup2
 RUN npm run db:setup2
 RUN npm run db:setup2
-RUN npm run db:setup2
-RUN npm run db:setup2
 
 # What port will the container talk to the outside world with once created?
 EXPOSE 3011
