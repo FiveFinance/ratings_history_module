@@ -48,7 +48,7 @@ const mockData = [
     filled: '2018-12-24T22:31:03.791Z',
     filledQuantityShares: 81,
     filledQuantityPrice: 81,
-    total: '144.00',
+    total: 144,
   },
   {
     symbol: 'FNMA',
@@ -61,7 +61,7 @@ const mockData = [
     filled: '2018-11-23T16:39:08.045Z',
     filledQuantityShares: 12,
     filledQuantityPrice: 12,
-    total: '710.00' 
+    total: 710, 
 },
   {
     symbol: 'CFG',
@@ -74,7 +74,7 @@ const mockData = [
     filled: '2018-10-24T09:47:34.008Z',
     filledQuantityShares: 77,
     filledQuantityPrice: 77,
-    total: '100.00',
+    total: 100,
   },
   {
     symbol: 'MYL',
@@ -87,7 +87,7 @@ const mockData = [
     filled: '2017-09-11T06:48:59.038Z',
     filledQuantityShares: 46,
     filledQuantityPrice: 46,
-    total: '913.00',
+    total: 913,
   },
 ];
 
@@ -107,12 +107,3 @@ describe('Purchase Component', () => {
     // expect(wrapper.find(Info).length).toBe(9);
   });
 });
-
-
-// it('should check month and years dropdowns displayed', () => {
-//     const props = {
-//         showMonthYearsDropdowns: true
-//     },
-//     DateInputComponent = mount(<DateInput {...props} />).find('.datepicker');
-//     expect(DateInputComponent.hasClass('react-datepicker-hide-month')).toEqual(true);
-// });

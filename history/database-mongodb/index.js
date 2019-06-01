@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
-const mongoUri = 'mongodb://localhost/fec_history';
-// const mongoUri = 'mongodb://172.19.0.2:27017/fec_history'; // docker network inspect
+const DBHOST = process.env.FEC_DB || 'mongodb://localhost:27017';
+const mongoUri = `${DBHOST}/fec_history`;
 
 mongoose.connect(mongoUri, { useNewUrlParser: true });
 const db = mongoose.connection;

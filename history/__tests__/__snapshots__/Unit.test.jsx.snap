@@ -95,7 +95,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "$144.00",
+                      "data": "$144",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -131,7 +131,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "$144.00",
+                        "data": "$144",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -188,7 +188,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "$144.00",
+                    "data": "$144",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -224,7 +224,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "$144.00",
+                      "data": "$144",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
