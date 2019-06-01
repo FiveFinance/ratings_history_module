@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 
 // const mongoUri = 'mongodb://172.17.0.4/fec_history'; // local docker
-const mongoUri = 'mongodb://localhost/fec_ratings';
+const mongoUri = 'mongodb://localhost/fec_history';
 // const mongoUri = 'mongodb://172.17.0.2/fec_history'; // AWS docker
 
 mongoose.connect(mongoUri, { useNewUrlParser: true });
