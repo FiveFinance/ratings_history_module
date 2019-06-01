@@ -11,10 +11,6 @@ app.use(cors());
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: true }));
 
-// const logErrors = (err, req, res, next) => {
-//   console.error(err.stack);
-//   next(err);
-// }
 const setDefault = (req, res, next) => {
   if (!req.params.id) {
     req.params.id = 'AAPL';
@@ -47,7 +43,7 @@ app.get('/api/history/:id', (req, res) => {
 });
 
 const server = app.listen(PORT, () => {
-  console.log(`Proxy server running at: http://localhost:${PORT}`);
+  process.stdout.write(`Proxy server running at: http://localhost:${PORT}`);
 });
 
 module.exports = { server, app };
