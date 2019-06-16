@@ -11,6 +11,9 @@ The Purchase History module renders a dynamic and individually expanding list of
 * Change directory into each module/microservice
 `cd history` or `cd ratings`
 
+* Alternatively, change directory into the proxy
+`cd proxy`
+
 * Download dependencies & compile
 `npm install`
 

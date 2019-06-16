@@ -50,6 +50,7 @@ class HistoryApp extends React.Component {
       ],
     };
     this.getPurchaseData = this.getPurchaseData.bind(this);
+    this.setPage = this.setPage.bind(this);
   }
 
   componentDidMount() {
@@ -62,19 +63,21 @@ class HistoryApp extends React.Component {
       axios.get('/api/history/AAPL')
         .then(res => res.data)
         .then((result) => {
-          this.setState({
-            purchases: result,
-          });
+          this.setPage(result);
         });
     } else {
       axios.get(`/api/history/${stockID}`)
         .then(res => res.data)
         .then((result) => {
-          this.setState({
-            purchases: result,
-          });
+          this.setPage(result);
         });
     }
+  }
+
+  setPage(result) {
+    this.setState({
+      purchases: result,
+    });
   }
 
   render() {

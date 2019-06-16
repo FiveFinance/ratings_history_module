@@ -17,6 +17,10 @@ services:
   ratings: 
     environment:
       - NODE_ENV=production
+      - FEC_HOST=http://localhost
+      # - FEC_HOST=http://ec2-18-221-144-48.us-east-2.compute.amazonaws.com
+      # - FEC_DB=mongodb://localhost
+      - FEC_DB=mongodb://172.19.0.2:27017
 
     build: ratings/
 

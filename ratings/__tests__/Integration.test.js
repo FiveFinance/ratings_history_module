@@ -1,6 +1,7 @@
-const mongoose = require('mongoose');
 const request = require('supertest');
-const app = require('../server.js');
+// const http = require('http');
+const mongoose = require('mongoose');
+const app = require('../app');
 
 const mongoUri = 'mongodb://localhost/fec_ratings';
 
@@ -108,13 +109,35 @@ const tickerNames = [
 ];
 
 describe('request response cycle', () => {
-  beforeEach(() => mongoose.connect(mongoUri));
-  afterEach(() => mongoose.disconnect());
+  beforeAll(() => mongoose.connect(mongoUri));
+  afterAll(() => mongoose.disconnect());
 
-  test('GET /api/history headers', (done) => {
-    const ticker = tickerNames[Math.random() * 100 | 0];
+  // let server;
+
+  // beforeAll((done) => {
+  //   server = http.createServer(app);
+  //   server.listen(done);
+  // });
+
+  // afterAll((done) => {
+  //   server.close(done);
+  // });
+
+  it('should handle requests to bad routes', (done) => {
     request(app)
-      .get(`/api/history/${ticker}`)
+      .get('/undefinedroute')
+      .then((response) => {
+        expect(response.status).toEqual(404);
+        expect(response.type).toEqual('text/html');
+        done();
+      });
+  });
+
+  xit('should GET /api/ratings headers', (done) => {
+    const stockID = tickerNames[Math.random() * 100 | 0];
+    console.log('testing ticker: ', stockID);
+    request(app)
+      .get(`/api/ratings/${stockID}`)
       .then((response) => {
         expect(response.status).toEqual(200);
         expect(response.type).toEqual('application/json');
@@ -122,10 +145,11 @@ describe('request response cycle', () => {
       });
   });
 
-  test('GET /api/history body', (done) => {
-    const ticker = tickerNames[Math.random() * 100 | 0];
+  xit('should GET /api/ratings body', (done) => {
+    const stockID = tickerNames[Math.random() * 100 | 0];
+    console.log('testing ticker: ', stockID);
     request(app)
-      .get(`/api/history/${ticker}`)
+      .get(`/api/ratings/${stockID}`)
       .then((response) => {
         expect(response.body[0]).toHaveProperty('symbol');
         expect(response.body[0]).toHaveProperty('company');

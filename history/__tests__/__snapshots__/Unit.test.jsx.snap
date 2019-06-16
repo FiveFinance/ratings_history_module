@@ -1,6 +1,6 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Purchase Component render purchase component correctly with mock data 1`] = `
+exports[`Purchase Component Should render purchase component correctly with mock data 1`] = `
 initialize {
   "0": Object {
     "attribs": Object {
@@ -33,7 +33,7 @@ initialize {
                 "name": "div",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Object {
-                  "data": "Feb 09",
+                  "data": "Sep 24",
                   "next": null,
                   "parent": [Circular],
                   "prev": [Circular],
@@ -50,7 +50,7 @@ initialize {
                 },
               },
               Object {
-                "data": "Feb 09",
+                "data": "Sep 24",
                 "next": null,
                 "parent": [Circular],
                 "prev": Object {
@@ -95,7 +95,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "$144",
+                      "data": "$25",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -105,7 +105,7 @@ initialize {
                   "name": "div",
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Object {
-                    "data": "81 shares at 81",
+                    "data": "84 shares at 84",
                     "next": null,
                     "parent": [Circular],
                     "prev": [Circular],
@@ -122,7 +122,7 @@ initialize {
                   },
                 },
                 Object {
-                  "data": "81 shares at 81",
+                  "data": "84 shares at 84",
                   "next": null,
                   "parent": [Circular],
                   "prev": Object {
@@ -131,7 +131,7 @@ initialize {
                     },
                     "children": Array [
                       Object {
-                        "data": "$144",
+                        "data": "$25",
                         "next": null,
                         "parent": [Circular],
                         "prev": null,
@@ -188,7 +188,7 @@ initialize {
                 },
                 "children": Array [
                   Object {
-                    "data": "$144",
+                    "data": "$25",
                     "next": null,
                     "parent": [Circular],
                     "prev": null,
@@ -198,7 +198,7 @@ initialize {
                 "name": "div",
                 "namespace": "http://www.w3.org/1999/xhtml",
                 "next": Object {
-                  "data": "81 shares at 81",
+                  "data": "84 shares at 84",
                   "next": null,
                   "parent": [Circular],
                   "prev": [Circular],
@@ -215,7 +215,7 @@ initialize {
                 },
               },
               Object {
-                "data": "81 shares at 81",
+                "data": "84 shares at 84",
                 "next": null,
                 "parent": [Circular],
                 "prev": Object {
@@ -224,7 +224,7 @@ initialize {
                   },
                   "children": Array [
                     Object {
-                      "data": "$144",
+                      "data": "$25",
                       "next": null,
                       "parent": [Circular],
                       "prev": null,
@@ -272,7 +272,7 @@ initialize {
                   "name": "div",
                   "namespace": "http://www.w3.org/1999/xhtml",
                   "next": Object {
-                    "data": "Feb 09",
+                    "data": "Sep 24",
                     "next": null,
                     "parent": [Circular],
                     "prev": [Circular],
@@ -289,7 +289,7 @@ initialize {
                   },
                 },
                 Object {
-                  "data": "Feb 09",
+                  "data": "Sep 24",
                   "next": null,
                   "parent": [Circular],
                   "prev": Object {

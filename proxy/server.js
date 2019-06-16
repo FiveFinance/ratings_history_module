@@ -6,6 +6,7 @@ const cors = require('cors');
 const app = express();
 
 const PORT = 80;
+const HOST = process.env.FEC_HOST || 'http://localhost';
 app.use(cors());
 
 app.use(bodyParser.json());
@@ -36,7 +37,7 @@ app.use('/', express.static(path.join(__dirname, 'client/dist')));
 app.use('/stocks/:id', express.static(path.join(__dirname, 'client/dist')));
 
 app.get('/api/ratings/:id', (req, res) => {
-  request(`http://localhost:3001/api/ratings/${req.params.id}/`, (err, response, body)=> {
+  request(`${HOST}:3001/api/ratings/${req.params.id}/`, (err, response, body)=> {
     if(err){
       res.status(res.statusCode).send(err);
     }else {
@@ -46,7 +47,7 @@ app.get('/api/ratings/:id', (req, res) => {
 });
 
 app.get('/api/history/:id', (req, res) => {
-  request(`http://localhost:3011/api/history/${req.params.id}/`, (err, response, body)=> {
+  request(`${HOST}:3011/api/history/${req.params.id}/`, (err, response, body)=> {
     if(err){
       res.status(response.statusCode).send(err);
     } else {
@@ -56,7 +57,7 @@ app.get('/api/history/:id', (req, res) => {
 });
 
 const server = app.listen(PORT, () => {
-  process.stdout.write(`Proxy server running at: http://localhost:${PORT}`);
+  console.log(`Proxy server running at: ${HOST}:${PORT}`);
 });
 
 module.exports = { server, app };

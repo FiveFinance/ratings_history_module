@@ -1,8 +1,6 @@
 jest.mock('../model');
 
-import { requestPurchase } from '../model';
-
-console.log('MOCK\ncontroller\ncontroller\ncontroller\ncontroller\ncontroller\ncontroller\ncontroller\n')
+import { requestPurchases } from '../model';
 
 const getPurchases = (stockID) => {
   return requestPurchases(`/api/history/${stockID}`)

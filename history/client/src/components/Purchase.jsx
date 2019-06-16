@@ -23,26 +23,20 @@ class Purchase extends React.Component {
   render() {
     const { expanded } = this.state;
     const { purchase } = this.props;
-    const { name, timeinforce, submitted, status, enteredQuantity, filled, filledQuantityShares, filledQuantityPrice, total } = purchase;
+    const {
+      name,
+      timeinforce,
+      submitted,
+      status,
+      enteredQuantity,
+      filled,
+      filledQuantityShares,
+      filledQuantityPrice,
+      total,
+    } = purchase;
     const submitTime = submitted.toString();
     const filledTime = filled.toString();
 
-    if (expanded === false) {
-      return (
-        <PurchaseWrapper expanded={expanded} onClick={e => this.toggleReadMore(e)}>
-          <Expandable>
-            <TopInfo>
-              <div className="bold left">{this.type}</div>
-              {dayjs(submitTime).format('MMM DD')}
-            </TopInfo>
-            <TopInfo>
-              <div className="bold right">{`$${total}`}</div>
-              {`${filledQuantityShares} ${filledQuantityShares === 1 ? 'share' : 'shares'} at ${filledQuantityPrice}`}
-            </TopInfo>
-          </Expandable>
-        </PurchaseWrapper>
-      );
-    }
     return (
       <PurchaseWrapper expanded={expanded} onClick={e => this.toggleReadMore(e)}>
         <Expandable>
@@ -56,48 +50,52 @@ class Purchase extends React.Component {
           </TopInfo>
         </Expandable>
 
-        <Details>
-          <Info>
-            <div className="key">Stock Name</div>
-            <div className="value">{name}</div>
-          </Info>
-          <Info>
-            <div className="key">Type</div>
-            <div className="value">{this.type}</div>
-          </Info>
-          <Info>
-            <div className="key">Time in Force</div>
-            <div className="value">{timeinforce}</div>
-          </Info>
-          <Info>
-            <div className="key">Submitted</div>
-            <div className="value">{dayjs(submitTime).format('MMM DD, YYYY')}</div>
-          </Info>
-          <Info>
-            <div className="key">Status</div>
-            <div className="value">{status}</div>
-          </Info>
-          <Info>
-            <div className="key">Entered Quantity</div>
-            <div className="value">{enteredQuantity}</div>
-          </Info>
-          <Info>
-            <div className="key">Filled</div>
-            <div className="value">{`${dayjs(filledTime).format('LLL')} EDT`}</div>
-          </Info>
-          <Info>
-            <div className="key">Filled Quantity</div>
-            <div className="value">{`${filledQuantityShares} ${filledQuantityShares === 1 ? 'share' : 'shares'} at ${filledQuantityPrice}`}</div>
-          </Info>
-          <Info>
-            <div className="key">Total</div>
-            <div className="value">
-              $
-              {total}
-            </div>
-          </Info>
-        </Details>
-        <DownloadTC>Download Trade Confirmation</DownloadTC>
+        {expanded === true && (
+        <React.Fragment>
+          <Details>
+            <Info>
+              <div className="key">Stock Name</div>
+              <div className="value">{name}</div>
+            </Info>
+            <Info>
+              <div className="key">Type</div>
+              <div className="value">{this.type}</div>
+            </Info>
+            <Info>
+              <div className="key">Time in Force</div>
+              <div className="value">{timeinforce}</div>
+            </Info>
+            <Info>
+              <div className="key">Submitted</div>
+              <div className="value">{dayjs(submitTime).format('MMM DD, YYYY')}</div>
+            </Info>
+            <Info>
+              <div className="key">Status</div>
+              <div className="value">{status}</div>
+            </Info>
+            <Info>
+              <div className="key">Entered Quantity</div>
+              <div className="value">{enteredQuantity}</div>
+            </Info>
+            <Info>
+              <div className="key">Filled</div>
+              <div className="value">{`${dayjs(filledTime).format('LLL')} EDT`}</div>
+            </Info>
+            <Info>
+              <div className="key">Filled Quantity</div>
+              <div className="value">{`${filledQuantityShares} ${filledQuantityShares === 1 ? 'share' : 'shares'} at ${filledQuantityPrice}`}</div>
+            </Info>
+            <Info>
+              <div className="key">Total</div>
+              <div className="value">
+                {`$${total}`}
+              </div>
+            </Info>
+          </Details>
+          <DownloadTC>Download Trade Confirmation</DownloadTC>
+        </React.Fragment>
+        )}
+
       </PurchaseWrapper>
     );
   }

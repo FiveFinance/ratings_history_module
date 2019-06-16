@@ -1,4 +1,3 @@
-console.log('MOCK\nmodel\nmodel\nmodel\nmodel\nmodel\nmodel\nmodel\n');
 const mockData = [
   {
     symbol: 'AAPL',
